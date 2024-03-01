@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../redux/actionTypes";
+import { updateTodo } from "../redux/actions/todoActions";
+import axios from "axios";
 
 
 const Modal = ({todo,close}) => {
@@ -10,11 +12,12 @@ const handleSubmit= (e) =>{
     const newText = e.target[1].value
     //eski todunun tüm verilerini alıp inputtan aldığımız veri ile güncelliyoruz
     const updated={...todo, text:newText}
+
+    axios.put(`/todos/${todo.id}`,updated)
+    .then(()=> 
     // stordaki todoyu güncelle
-    dispatch({
-        type:ActionTypes.UPDATE_TODO,
-        payload: updated,
-    })
+    dispatch(updateTodo(updated)))
+
     //modalı kapat
     close();
 }

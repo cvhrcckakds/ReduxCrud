@@ -1,9 +1,12 @@
 import { v4} from 'uuid';
 import {  useDispatch } from 'react-redux';
+import { addTodo } from '../redux/actions/todoActions';
+import axios from 'axios';
+
 
 const AddForm = () => {
     //dispatch kurulum
-    const distpatch= useDispatch();
+    const dispatch= useDispatch();
 
     //form gönderilince
     const handleSubmit=(e)=>{
@@ -19,12 +22,14 @@ const AddForm = () => {
             is_done:false,
             created_at: new Date().toLocaleDateString(),
         }
-        //Oluşturulan todo'yu stora ekle:(önce disthpach import et sonra kur)
-        distpatch({
-            type:'ADD_TODO', //todoreducerdan geldi
-            payload: newTodo, //stora todo ekle
-        })
-        console.log(newTodo)
+
+        axios
+        .post("/todos", newTodo)
+        .then(()=> {
+        dispatch(addTodo(newTodo))
+        }); //Oluşturulan todo'yu stora ekle:(önce disthpach import et sonra kur)
+       
+    
     }
   return (
     <form onSubmit={handleSubmit} className="d-flex gap-1 d-flex my-5">

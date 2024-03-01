@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "./Modal";;
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../redux/actionTypes";
+import { removeTodo, updateTodo } from "../redux/actions/todoActions";
+import axios from "axios";
 
 
 const TodoCard = ({ todo }) => {
@@ -10,10 +12,12 @@ const TodoCard = ({ todo }) => {
 
   // stordan todoyu kaldır
   const handleDelete = () => {
-    dispatch({
-      type: ActionTypes.REMOVE_TODO,
-      payload: todo.id,
-    });
+    //apiya silme isteği at
+    axios
+    .delete(`/todos/${todo.id}`) //veriler apiden gelirken state yönetimi için store güncellememeliyiz api isteği bşarılı olduğu takdirde güncellenmelidir.
+    //stordan sil arayüzü günceller
+    .then(()=>dispatch(removeTodo(todo.id)))
+    .catch(()=>alert("Silme işleminde bir hata oluştu"))
   };
 
   // storadaki todonun isdone değerini tersine çevir
@@ -21,11 +25,9 @@ const TodoCard = ({ todo }) => {
     //todo'nun isdone değerini terse çevir
     const updated={...todo, is_done: !todo.is_done};
 
+    axios.put(`/todos/${todo.id}`, updated)
     // storedaki eski todoyu güncel todo ile değiştir
-    dispatch({
-        type: ActionTypes.UPDATE_TODO,
-        payload:updated,
-    })
+    .then(()=>dispatch(updateTodo(updated)))
 }
 
   return (

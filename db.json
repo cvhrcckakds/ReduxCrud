@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "id": "d7ec1a09-9808-4693-a24d-8fc666a6fa7e",
+      "text": "typescript",
+      "is_done": false,
+      "created_at": "29.02.2024"
+    },
+    {
+      "id": "66c18e5e-ef5e-422d-8042-087423c71800",
+      "text": "html",
+      "is_done": true,
+      " created_at": "29.02.2024"
+    }
+  ]
+}

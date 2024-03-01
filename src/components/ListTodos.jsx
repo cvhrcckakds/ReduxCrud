@@ -7,6 +7,7 @@ const ListTodos = () => {
   // bunun için=> store.reducerİsmi yazılır
   const store = useSelector((store) => store.todoReducer); //abonelik store abone ettik stora yazacak tüm veriyi
   
+  console.log(store.todos)
   return (
     <div>
       {store.todos.map(

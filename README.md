@@ -44,4 +44,5 @@
 
 
 # ReduxCrud Proje Gif:
-<img src="./public/Redux-Crud.gif" ># NoteProject
+<img src="./public/ReduxCrud.gif" ># NoteProject
+# ReduxCrud
